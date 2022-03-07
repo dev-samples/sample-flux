@@ -1,0 +1,14 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jenkins
+  namespace: jenkins
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  values:
+    controller:
+      image: "jenkins/jenkins"
+      jenkinsUriPrefix: /team-a-jenkins
+

@@ -1,0 +1,50 @@
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jenkins
+  namespace: jenkins
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: jenkins
+  interval: 5m
+  chart:
+    spec:
+      chart: jenkins
+      version: 3.11.4
+      sourceRef:
+        kind: HelmRepository
+        name: jenkins
+        namespace: flux-system
+  values:
+    controller:
+      image: "jenkins/jenkins"
+      jenkinsUriPrefix: /your-team
+      JCasC:
+        defaultConfig: true
+        configScripts:
+          use-script-security: |
+            security:
+              globalJobDslSecurityConfiguration:
+                useScriptSecurity: false
+          seed-job: |
+            jobs:
+              - script: |
+                  pipelineJob('seed-job') {
+
+                    definition {
+                        cpsScm {
+                            scm {
+                                git {
+                                  remote {
+                                      #credentials('jenkins-ssh-key')
+                                      url("${SEED_JOB}")
+                                  }
+                                  branch('master')
+                              }
+                            }
+                        }
+                    }
+                  }                     

@@ -1,0 +1,24 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  prune: true
+  validation: client
+  path: "./tenants/kind-dev/team-a-jenkins"
+  #path: "./apps/support/erst-aks-support-02/sandbox-01-devops/"
+  postBuild:
+    substitute:
+      cicd_repo_url: "git@rep.erst.dk:demo/demo-maint-nginx.git"
+

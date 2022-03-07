@@ -1,0 +1,44 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: sample-spring-boot-app
+  namespace: team-a-jenkins
+spec:
+  interval: 1m
+  url: ssh://git@bitbucket.org/jserup/sample-spring-boot-app.git
+  #url: ssh://git@bitbucket.org:jserup/sample-spring-boot-app.git  
+  secretRef:
+    name: ssh-credentials
+  ref:
+    branch: master
+---
+
+#apiVersion: source.toolkit.fluxcd.io/v1beta1
+#kind: GitRepository
+#metadata:
+#  name: sample-vuejs-app
+#  namespace: project-a
+#spec:
+#  interval: 1m
+#  url: ssh://git@bitbucket.org:jserup/sample-vuejs-app.git
+#  secretRef:
+#    name: ssh-credentials
+#---
+
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: team-a-jenkins
+  namespace: team-a-jenkins
+spec:
+  serviceAccountName: team-a-jenkins
+  targetNamespace: team-a-jenkins
+  path: "./kustomize/dev"
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: sample-spring-boot-app
+  prune: true
+  validation: client
+
