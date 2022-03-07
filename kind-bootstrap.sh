@@ -17,7 +17,7 @@ flux bootstrap github \
 --context=kind-$ENV \
 --owner=dev-samples \
 --repository=sample-flux \
---branch=sample-01-variable-substitution \
+--branch=sample-01-variable-substitution-debug \
 --path=clusters/kind-$ENV
 
 

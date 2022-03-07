@@ -5,7 +5,7 @@ resources:
   - ../../base
   - ../secrets
 
-namespace: team-a-jenkins
+#namespace: team-a-jenkins
 #namespace: flux-system
 #namePrefix: team-a-jenkins-
 
