@@ -11,4 +11,9 @@ spec:
     controller:
       image: "jenkins/jenkins"
       jenkinsUriPrefix: /team-a-jenkins
-
+      JCasC:
+        defaultConfig: true
+        configScripts:
+          welcome-message: |
+            jenkins:
+              systemMessage: Welcome from team-a.
