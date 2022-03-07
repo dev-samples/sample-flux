@@ -9,9 +9,8 @@ resources:
 #namespace: flux-system
 #namePrefix: team-a-jenkins-
 
-
 patchesStrategicMerge:
   - jenkins-release.yaml
-  - variables.yaml
+#  - variables.yaml
 
 
