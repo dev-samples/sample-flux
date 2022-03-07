@@ -8,7 +8,7 @@ resources:
 namespace: team-b-jenkins
 
 patchesStrategicMerge:
-  - release.yaml
+  - jenkins-release.yaml
 
 
 #  - variables.yaml  

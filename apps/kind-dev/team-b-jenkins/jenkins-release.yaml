@@ -3,8 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: jenkins
-  #namespace: team-b-jenkins
-  namespace: jenkins  
+  namespace: jenkins
   annotations:
     flux.weave.works/automated: "true"
 spec:
@@ -12,4 +11,9 @@ spec:
     controller:
       image: "jenkins/jenkins"
       jenkinsUriPrefix: /team-b-jenkins
-      
+      JCasC:
+        defaultConfig: true
+        configScripts:
+          welcome-message: |
+            jenkins:
+              systemMessage: Welcome from team-b.

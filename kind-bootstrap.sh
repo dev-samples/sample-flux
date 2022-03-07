@@ -17,7 +17,7 @@ flux bootstrap github \
 --context=kind-$ENV \
 --owner=dev-samples \
 --repository=sample-flux \
---branch=master \
+--branch=sample-01 \
 --path=clusters/kind-$ENV
 
 
